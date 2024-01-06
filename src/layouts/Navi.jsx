@@ -9,6 +9,7 @@ import {
   Menu,
   Container,
 } from "semantic-ui-react";
+import CartSummary from "./CartSummary";
 
 function Navi() {
   return (
@@ -19,14 +20,7 @@ function Navi() {
           <MenuItem name="messages" />
 
           <MenuMenu position="right">
-            <Dropdown item text="Language">
-              <DropdownMenu>
-                <DropdownItem>English</DropdownItem>
-                <DropdownItem>Russian</DropdownItem>
-                <DropdownItem>Spanish</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-
+            <CartSummary />
             <MenuItem>
               <Button primary>Sign Up</Button>
             </MenuItem>
