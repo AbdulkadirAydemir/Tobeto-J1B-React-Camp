@@ -1,11 +1,8 @@
 import React from "react";
 import {
-  DropdownMenu,
-  DropdownItem,
   MenuMenu,
   MenuItem,
   Button,
-  Dropdown,
   Menu,
   Container,
 } from "semantic-ui-react";
@@ -14,7 +11,7 @@ import CartSummary from "./CartSummary";
 function Navi() {
   return (
     <div>
-      <Menu inverted fixed>
+      <Menu inverted fixed="top">
         <Container>
           <MenuItem name="home" />
           <MenuItem name="messages" />

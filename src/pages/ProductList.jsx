@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   TableRow,
   TableHeaderCell,
@@ -8,46 +8,53 @@ import {
   TableBody,
   MenuItem,
   Icon,
-  Label,
   Menu,
   Table,
-} from 'semantic-ui-react';
+} from "semantic-ui-react";
+import ProductService from "../services/productService";
 
 function ProductList() {
+  const [products, setproducts] = useState([]);
+
+  useEffect(() => {
+    axiosGet();
+  }, []);
+
+  const axiosGet = async () => {
+    let productService = new ProductService();
+    productService
+      .getProducts()
+      .then((result) => setproducts(result.data.products));
+  };
+
   return (
     <div>
       <Table celled>
         <TableHeader>
           <TableRow>
-            <TableHeaderCell>Header</TableHeaderCell>
-            <TableHeaderCell>Header</TableHeaderCell>
-            <TableHeaderCell>Header</TableHeaderCell>
+            <TableHeaderCell>Ürün adı</TableHeaderCell>
+            <TableHeaderCell>Birim fiyatı</TableHeaderCell>
+            <TableHeaderCell>Stok adedi</TableHeaderCell>
+            <TableHeaderCell>Açıklama</TableHeaderCell>
+            <TableHeaderCell>Kategori</TableHeaderCell>
           </TableRow>
         </TableHeader>
 
         <TableBody>
-          <TableRow>
-            <TableCell>
-              <Label ribbon>First</Label>
-            </TableCell>
-            <TableCell>Cell</TableCell>
-            <TableCell>Cell</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Cell</TableCell>
-            <TableCell>Cell</TableCell>
-            <TableCell>Cell</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Cell</TableCell>
-            <TableCell>Cell</TableCell>
-            <TableCell>Cell</TableCell>
-          </TableRow>
+          {products.map((product) => (
+            <TableRow key={product.id}>
+              <TableCell>{product.title}</TableCell>
+              <TableCell>{product.price}</TableCell>
+              <TableCell>{product.stock}</TableCell>
+              <TableCell>{product.description}</TableCell>
+              <TableCell>{product.category}</TableCell>
+            </TableRow>
+          ))}
         </TableBody>
 
         <TableFooter>
           <TableRow>
-            <TableHeaderCell colSpan="3">
+            <TableHeaderCell colSpan="5">
               <Menu floated="right" pagination>
                 <MenuItem as="a" icon>
                   <Icon name="chevron left" />
