@@ -12,6 +12,7 @@ import {
   Table,
 } from "semantic-ui-react";
 import ProductService from "../services/productService";
+import { Link } from "react-router-dom";
 
 function ProductList() {
   const [products, setproducts] = useState([]);
@@ -43,7 +44,9 @@ function ProductList() {
         <TableBody>
           {products.map((product) => (
             <TableRow key={product.id}>
-              <TableCell>{product.title}</TableCell>
+              <TableCell>
+                <Link to={`/products/${product.id}`}>{product.title}</Link>
+              </TableCell>
               <TableCell>{product.price}</TableCell>
               <TableCell>{product.stock}</TableCell>
               <TableCell>{product.description}</TableCell>
