@@ -15,6 +15,7 @@ function CartSummary() {
               <Label style={{ marginLeft: 8 }}>{cardItem.quantity}</Label>
             </DropdownItem>
           ))}
+          
           <Dropdown.Divider />
           <DropdownItem as={NavLink} to="/cart">
             Sepete Git
