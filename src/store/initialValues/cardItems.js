@@ -1,1 +1,1 @@
-export const cardItems = [{ quantity: 1, product: { productName: "Çubuk kraker" } }]
+export const cardItems = []

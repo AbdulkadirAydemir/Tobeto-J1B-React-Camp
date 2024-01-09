@@ -10,12 +10,17 @@ import {
   Icon,
   Menu,
   Table,
+  Button,
 } from "semantic-ui-react";
 import ProductService from "../services/productService";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCard } from "../store/actions/cardActions";
 
 function ProductList() {
   const [products, setproducts] = useState([]);
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     axiosGet();
@@ -28,6 +33,9 @@ function ProductList() {
       .then((result) => setproducts(result.data.products));
   };
 
+  const handleAddToCard = (product) => {
+    dispatch(addToCard(product))
+  }
   return (
     <div>
       <Table celled>
@@ -38,6 +46,7 @@ function ProductList() {
             <TableHeaderCell>Stok adedi</TableHeaderCell>
             <TableHeaderCell>Açıklama</TableHeaderCell>
             <TableHeaderCell>Kategori</TableHeaderCell>
+            <TableHeaderCell></TableHeaderCell>
           </TableRow>
         </TableHeader>
 
@@ -51,6 +60,11 @@ function ProductList() {
               <TableCell>{product.stock}</TableCell>
               <TableCell>{product.description}</TableCell>
               <TableCell>{product.category}</TableCell>
+              <TableCell>
+                <Button onClick={() => handleAddToCard(product)}>
+                  Sepete Ekle
+                </Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

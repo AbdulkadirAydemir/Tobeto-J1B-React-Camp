@@ -4,20 +4,22 @@ import CartSummary from "./CartSummary";
 import SignedOut from "./SignedOut";
 import SignedIn from "./SignedIn";
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Navi() {
+  const { cardItems } = useSelector((state) => state.card);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  function handleSignedOut(params){
-    setIsAuthenticated(false)
-    navigate("/")
+  function handleSignedOut(params) {
+    setIsAuthenticated(false);
+    navigate("/");
   }
-  
-  function handleSignedIn(params){
-    setIsAuthenticated(true)
+
+  function handleSignedIn(params) {
+    setIsAuthenticated(true);
   }
 
   return (
@@ -28,8 +30,12 @@ function Navi() {
           <MenuItem name="messages" />
 
           <MenuMenu position="right">
-            <CartSummary />
-            {isAuthenticated ? <SignedIn signedOut={handleSignedOut} /> : <SignedOut  signedIn={handleSignedIn}/>}
+            {cardItems.length > 0 && <CartSummary />}
+            {isAuthenticated ? (
+              <SignedIn signedOut={handleSignedOut} />
+            ) : (
+              <SignedOut signedIn={handleSignedIn} />
+            )}
           </MenuMenu>
         </Container>
       </Menu>
